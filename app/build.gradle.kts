@@ -65,7 +65,7 @@ dependencies {
     // Navigation
     implementation(libs.navigation.compose)
 
-    implementation (libs.androidx.navigation.compose.v253) // Verifica la última versión compatible con Compose
-    implementation (libs.material3)   // Verifica la última versión de Material 3
+    implementation(libs.androidx.navigation.compose.v253)
+    implementation(libs.material3)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
 }
