@@ -7,12 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.data.GamesRepository
-import com.borjadelgadodev.freetogame.ui.screens.detail.DetailViewModel.UiState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.borjadelgadodev.freetogame.data.GamesRepositoryImpl
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: GamesRepository = GamesRepository()) : ViewModel() {
+class HomeViewModel(private val repository: GamesRepository = GamesRepositoryImpl()) : ViewModel() {
     var state by mutableStateOf(UiState())
         private set
 

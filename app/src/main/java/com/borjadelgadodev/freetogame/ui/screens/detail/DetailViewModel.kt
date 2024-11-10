@@ -1,16 +1,19 @@
 package com.borjadelgadodev.freetogame.ui.screens.detail
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.borjadelgadodev.freetogame.data.Game
-import com.borjadelgadodev.freetogame.data.GamesRepository
+import com.borjadelgadodev.freetogame.data.GameRepository
+import com.borjadelgadodev.freetogame.data.GameRepositoryImpl
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val gameId: Int, private val repository: GamesRepository = GamesRepository()) : ViewModel() {
+class DetailViewModel(
+    private val gameId: Int,
+    private val repository: GameRepository = GameRepositoryImpl()
+) : ViewModel() {
     var state by mutableStateOf(UiState())
         private set
 
