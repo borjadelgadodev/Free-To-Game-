@@ -12,4 +12,3 @@ interface GamesApi {
     @GET(GAMES_ENDPOINT)
     suspend fun getGames(): List<Game>
 }
-
