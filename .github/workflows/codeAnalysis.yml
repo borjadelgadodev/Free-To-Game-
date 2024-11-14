@@ -1,0 +1,28 @@
+name: Code Analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/*
+
+jobs:
+  code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run codeRabbit
+        run: |
+          # Asegúrate de configurar correctamente el comando para ejecutar codeRabbit
+          coderabbit-cli analyze || exit 1
+
+      - name: Run CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: kotlin 
+        continue-on-error: false
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
