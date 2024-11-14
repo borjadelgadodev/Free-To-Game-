@@ -5,4 +5,5 @@ object Constants {
     const val GAMES_ENDPOINT = "games"
     const val GAME_ID_ENDPOINT = "game"
     const val PRUEBA = "No se usa "
+    const val PRUEBA_DOS = "No se usa "
 }
