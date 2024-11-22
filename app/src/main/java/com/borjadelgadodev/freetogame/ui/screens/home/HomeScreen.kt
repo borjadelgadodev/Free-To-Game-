@@ -16,8 +16,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,7 +32,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.borjadelgadodev.freetogame.R
 import com.borjadelgadodev.freetogame.data.Game
-import com.borjadelgadodev.freetogame.ui.common.Loading
+import com.borjadelgadodev.freetogame.ui.components.Loading
 import com.borjadelgadodev.freetogame.ui.theme.FreeToGameTheme
 
 @Composable
@@ -48,15 +49,14 @@ fun Screen(content: @Composable () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(onClick: (Game) -> Unit, viewModel: HomeViewModel = viewModel()) {
-    val state = viewModel.state
+    val state by viewModel.state.collectAsState()
+    val homeState = rememberHomeState()
 
     if (state.games.isEmpty() && !state.loading) {
         viewModel.onUiReady()
     }
 
     Screen {
-        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -71,16 +71,16 @@ fun HomeScreen(onClick: (Game) -> Unit, viewModel: HomeViewModel = viewModel()) 
                             )
                         }
                     },
-                    scrollBehavior = scrollBehavior
+                    scrollBehavior = homeState.scrollBehavior
                 )
             },
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+            modifier = Modifier.nestedScroll(homeState.scrollBehavior.nestedScrollConnection)
         ) { padding ->
             if (state.loading) {
                 Loading(modifier = Modifier.padding(padding))
             } else {
                 LazyVerticalGrid(
-                    columns = GridCells.Adaptive(150.dp),
+                    columns = GridCells.Adaptive(120.dp),
                     contentPadding = padding
                 ) {
                     items(state.games) { game ->

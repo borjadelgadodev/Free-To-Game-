@@ -63,9 +63,9 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
     // Navigation
-    implementation(libs.navigation.compose)
 
     implementation(libs.androidx.navigation.compose.v253)
     implementation(libs.material3)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.kotlin.serialization)
 }
