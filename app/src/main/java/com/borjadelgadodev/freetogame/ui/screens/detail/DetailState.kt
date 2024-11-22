@@ -9,10 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 
 @OptIn(ExperimentalMaterial3Api::class)
-class DetailState(
-    val scrollBehavior: TopAppBarScrollBehavior,
-    val snackbarHostState: SnackbarHostState
-) {
+class DetailState(val scrollBehavior: TopAppBarScrollBehavior, val snackbarHostState: SnackbarHostState) {
     @Composable
     fun ShowMessage(message: String?, onMessageShown: () -> Unit) {
         LaunchedEffect(message) {

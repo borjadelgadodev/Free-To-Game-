@@ -67,5 +67,4 @@ dependencies {
     implementation(libs.androidx.navigation.compose.v253)
     implementation(libs.material3)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.kotlin.serialization)
 }

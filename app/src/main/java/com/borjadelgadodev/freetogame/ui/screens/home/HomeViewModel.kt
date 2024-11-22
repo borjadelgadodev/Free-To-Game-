@@ -16,8 +16,8 @@ class HomeViewModel(private val repository: GamesRepository = GamesRepositoryImp
 
     fun onUiReady() {
         viewModelScope.launch {
-            val games = repository.getGames()
             _state.value = UiState(loading = true)
+            val games = repository.getGames()
             _state.value = UiState(loading = false, games)
         }
     }

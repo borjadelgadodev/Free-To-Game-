@@ -40,7 +40,7 @@ fun Navigation() {
                 arguments = listOf(navArgument(NavArgs.GameId.key) { type = NavType.IntType })
             ) { backStackEntry ->
                 val gameId = requireNotNull(backStackEntry.arguments?.getInt(NavArgs.GameId.key))
-                DetailScreen(DetailViewModel(context = navController.context, gameId = gameId),
+                DetailScreen(DetailViewModel(gameId = gameId),
                     onBackClick = { navController.popBackStack() })
             }
         }

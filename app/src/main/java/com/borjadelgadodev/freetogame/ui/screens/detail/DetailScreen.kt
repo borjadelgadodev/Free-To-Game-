@@ -1,5 +1,6 @@
 package com.borjadelgadodev.freetogame.ui.screens.detail
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -25,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -34,6 +36,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.borjadelgadodev.freetogame.R
 import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.ui.components.CustomSnackbar
 import com.borjadelgadodev.freetogame.ui.components.Loading
@@ -45,6 +48,7 @@ fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
 
     val state by viewModel.state.collectAsState()
     val detailState = rememberDetailState()
+    val context = LocalContext.current
 
     detailState.ShowMessage(message = state.message) {
         viewModel.onAction(DetailAction.MessageShown)
@@ -60,7 +64,11 @@ fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
                 )
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = { viewModel.onAction(DetailAction.FavoriteClick) }) {
+                FloatingActionButton(onClick = {
+
+                    val message = context.getStringResource(R.string.game_added_to_favorites)
+                    viewModel.onAction(DetailAction.FavoriteClick, message)
+                }) {
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = null
@@ -152,4 +160,8 @@ private fun AnnotatedString.Builder.Property(key: String, value: String, end: Bo
             append("\n")
         }
     }
+}
+
+fun Context.getStringResource(resId: Int): String {
+    return this.getString(resId)
 }
