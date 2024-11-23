@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">FreeToGame</string>
     <string name="app_title">Free To Game</string>
+
+    <string name="home">Home</string>
+    <string name="my_games">My Games</string>
+    <string name="profile">Profile</string>
+    <string name="detail">Detail</string>
+
+    <string name="game_added_to_favorites">Game added to favorites</string>
+    <string name="close">Close</string>
 </resources>

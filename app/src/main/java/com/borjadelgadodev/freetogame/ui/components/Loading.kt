@@ -1,4 +1,4 @@
-package com.borjadelgadodev.freetogame.ui.common
+package com.borjadelgadodev.freetogame.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
