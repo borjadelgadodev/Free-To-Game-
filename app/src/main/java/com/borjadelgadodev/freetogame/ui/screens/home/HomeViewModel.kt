@@ -2,28 +2,28 @@ package com.borjadelgadodev.freetogame.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.borjadelgadodev.freetogame.Result
 import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.data.GamesRepository
-import com.borjadelgadodev.freetogame.data.GamesRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: GamesRepository = GamesRepositoryImpl()) : ViewModel() {
+class HomeViewModel(private val repository: GamesRepository) : ViewModel() {
 
-    private val _state = MutableStateFlow(UiState())
+    private val _state = MutableStateFlow<Result<List<Game>>>(Result.Loading)
     val state get() = _state.asStateFlow()
 
     fun onUiReady() {
         viewModelScope.launch {
-            _state.value = UiState(loading = true)
-            val games = repository.getGames()
-            _state.value = UiState(loading = false, games)
+            _state.value = Result.Loading
+            try {
+                repository.games.collect { games ->
+                    _state.value = Result.Success(games)
+                }
+            } catch (e: Exception) {
+                _state.value = Result.Error(e)
+            }
         }
     }
-
-    data class UiState(
-        val loading: Boolean = false,
-        val games: List<Game> = emptyList()
-    )
 }
