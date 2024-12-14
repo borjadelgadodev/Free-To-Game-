@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -32,7 +35,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.borjadelgadodev.freetogame.R
 import com.borjadelgadodev.freetogame.data.Game
-import com.borjadelgadodev.freetogame.ui.components.Loading
+import com.borjadelgadodev.freetogame.ui.components.AcScaffold
 import com.borjadelgadodev.freetogame.ui.theme.FreeToGameTheme
 
 @Composable
@@ -52,12 +55,11 @@ fun HomeScreen(onClick: (Game) -> Unit, viewModel: HomeViewModel = viewModel()) 
     val state by viewModel.state.collectAsState()
     val homeState = rememberHomeState()
 
-    if (state.games.isEmpty() && !state.loading) {
-        viewModel.onUiReady()
-    }
+    viewModel.onUiReady()
 
     Screen {
-        Scaffold(
+        AcScaffold(
+            state = state,
             topBar = {
                 TopAppBar(
                     title = {
@@ -75,17 +77,13 @@ fun HomeScreen(onClick: (Game) -> Unit, viewModel: HomeViewModel = viewModel()) 
                 )
             },
             modifier = Modifier.nestedScroll(homeState.scrollBehavior.nestedScrollConnection)
-        ) { padding ->
-            if (state.loading) {
-                Loading(modifier = Modifier.padding(padding))
-            } else {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(120.dp),
-                    contentPadding = padding
-                ) {
-                    items(state.games) { game ->
-                        GameItem(game = game, onClick = { onClick(game) })
-                    }
+        ) { padding, games ->
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(120.dp),
+                contentPadding = padding
+            ) {
+                items(games) { game ->
+                    GameItem(game = game, onClick = { onClick(game) })
                 }
             }
         }
@@ -100,17 +98,30 @@ fun GameItem(game: Game, onClick: () -> Unit) {
             .padding(8.dp)
             .fillMaxWidth()
     ) {
-        AsyncImage(
-            model = game.thumbnail,
-            contentDescription = game.title,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .clip(MaterialTheme.shapes.small),
-            contentScale = ContentScale.Crop
-        )
+        Box {
+            AsyncImage(
+                model = game.thumbnail,
+                contentDescription = game.title,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(MaterialTheme.shapes.small),
+                contentScale = ContentScale.Crop
+            )
+            if (game.isFavorite) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = stringResource(R.string.favorite),
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.TopEnd)
+                        .size(32.dp)
+                )
+            }
+        }
         Text(
-            text = game.title,
+            text = game.title ?: "",
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

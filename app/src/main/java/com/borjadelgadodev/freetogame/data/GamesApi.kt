@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GamesApi {
+
     @GET(GAME_ID_ENDPOINT)
     suspend fun getGameById(@Query("id") gameId: Int): Game
 
