@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.borjadelgadodev.freetogame.Result
 import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.data.GamesRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class HomeViewModel(private val repository: GamesRepository) : ViewModel() {
                     _state.value = Result.Success(games)
                 }
             } catch (e: Exception) {
+                if (e is CancellationException) throw e
                 _state.value = Result.Error(e)
             }
         }

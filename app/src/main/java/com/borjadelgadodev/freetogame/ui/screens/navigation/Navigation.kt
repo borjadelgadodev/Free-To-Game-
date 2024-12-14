@@ -5,6 +5,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,7 +41,7 @@ fun Navigation() {
                     onClick = { game ->
                         navController.navigate(ScreenDestination.Detail.createDetailRoute(game.id))
                     },
-                    viewModel = HomeViewModel(gamesRepository),
+                    viewModel = viewModel { HomeViewModel(gamesRepository) },
                 )
             }
             composable(ScreenDestination.MyGames.route) {
@@ -54,7 +55,8 @@ fun Navigation() {
                 arguments = listOf(navArgument(NavArgs.GameId.key) { type = NavType.IntType })
             ) { backStackEntry ->
                 val gameId = requireNotNull(backStackEntry.arguments?.getInt(NavArgs.GameId.key))
-                DetailScreen(DetailViewModel(gameId, gamesRepository),
+                DetailScreen(
+                    viewModel = viewModel { DetailViewModel(gameId, gamesRepository) },
                     onBackClick = { navController.popBackStack() })
             }
         }

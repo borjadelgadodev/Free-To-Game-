@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 data class Game(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val title: String? = null,
+    val title: String,
     val description: String? = null,
-    val thumbnail: String? = null,
-    val genre: String? = null,
-    val platform: String? = null,
-    val developer: String? = null,
+    val thumbnail: String,
+    val genre: String,
+    val platform: String,
+    val developer: String,
     val isFavorite: Boolean
 )

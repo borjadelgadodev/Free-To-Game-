@@ -10,7 +10,7 @@ import com.borjadelgadodev.freetogame.stateAsResultIn
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class DetailViewModel(gameId: Int, private val repository: GamesRepository) : ViewModel() {
+class DetailViewModel(private val gameId: Int, private val repository: GamesRepository) : ViewModel() {
 
     val state: StateFlow<Result<Game?>> = repository.getGameById(gameId)
         .stateAsResultIn(viewModelScope)

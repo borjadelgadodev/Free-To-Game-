@@ -44,6 +44,7 @@ import com.borjadelgadodev.freetogame.ui.screens.home.Screen
 @Composable
 fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
     val state by viewModel.state.collectAsState()
+    val detailState = rememberDetailState()
 
     Screen {
         AcScaffold(
@@ -51,7 +52,7 @@ fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
             topBar = {
                 DetailTopBar(
                     title = (state as? Result.Success)?.data?.title ?: "",
-                    scrollBehavior = rememberDetailState().scrollBehavior,
+                    scrollBehavior = detailState.scrollBehavior,
                     onBackClick = onBackClick
                 )
             },
@@ -69,7 +70,7 @@ fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
                     viewModel.onFavoriteClick()
                 }
             },
-            modifier = Modifier.nestedScroll(rememberDetailState().scrollBehavior.nestedScrollConnection)
+            modifier = Modifier.nestedScroll(detailState.scrollBehavior.nestedScrollConnection)
         ) { padding, game ->
             if (game != null) {
                 GameDetail(
