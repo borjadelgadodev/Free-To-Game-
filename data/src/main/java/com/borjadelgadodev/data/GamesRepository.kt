@@ -1,7 +1,8 @@
-package com.borjadelgadodev.freetogame.data
+package com.borjadelgadodev.data
 
-import com.borjadelgadodev.freetogame.data.datasource.GamesLocalDataSource
-import com.borjadelgadodev.freetogame.data.datasource.remote.GamesRemoteDataSource
+import com.borjadelgadodev.data.datasource.GamesLocalDataSource
+import com.borjadelgadodev.data.datasource.GamesRemoteDataSource
+import com.borjadelgadodev.domain.Game
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach

@@ -1,5 +1,6 @@
-package com.borjadelgadodev.freetogame.data
+package com.borjadelgadodev.freetogame.framework.remote
 
+import com.borjadelgadodev.domain.Game
 import com.borjadelgadodev.freetogame.utils.Constants.GAMES_ENDPOINT
 import com.borjadelgadodev.freetogame.utils.Constants.GAME_ID_ENDPOINT
 import retrofit2.http.GET

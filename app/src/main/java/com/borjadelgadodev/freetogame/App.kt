@@ -2,7 +2,7 @@ package com.borjadelgadodev.freetogame
 
 import android.app.Application
 import androidx.room.Room
-import com.borjadelgadodev.freetogame.data.datasource.database.GamesDatabase
+import com.borjadelgadodev.freetogame.framework.database.GamesDatabase
 
 class App : Application() {
     lateinit var db: GamesDatabase
