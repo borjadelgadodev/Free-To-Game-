@@ -1,10 +1,11 @@
-package com.borjadelgadodev.freetogame.data
+package com.borjadelgadodev.freetogame.framework.database
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Game(
+data class DbGame(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
@@ -13,5 +14,6 @@ data class Game(
     val genre: String,
     val platform: String,
     val developer: String,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    @Embedded val minimumSystemRequirements: DbMinimumSystemRequirements?,
 )

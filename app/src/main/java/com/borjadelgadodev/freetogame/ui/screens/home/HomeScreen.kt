@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.borjadelgadodev.domain.Game
 import com.borjadelgadodev.freetogame.R
-import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.ui.components.AcScaffold
 import com.borjadelgadodev.freetogame.ui.theme.FreeToGameTheme
 

@@ -13,7 +13,7 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
+    this.repositories {
         google()
         mavenCentral()
     }
@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "FreeToGame"
 include(":app")
+include(":domain")
+include(":data")
+include(":usecases")

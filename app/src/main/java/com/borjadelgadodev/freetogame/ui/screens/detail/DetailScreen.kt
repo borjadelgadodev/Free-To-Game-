@@ -34,8 +34,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.borjadelgadodev.domain.Game
 import com.borjadelgadodev.freetogame.Result
-import com.borjadelgadodev.freetogame.data.Game
 import com.borjadelgadodev.freetogame.ui.components.AcScaffold
 import com.borjadelgadodev.freetogame.ui.components.CustomSnackbar
 import com.borjadelgadodev.freetogame.ui.screens.home.Screen

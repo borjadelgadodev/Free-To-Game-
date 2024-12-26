@@ -1,4 +1,4 @@
-package com.borjadelgadodev.freetogame.data
+package com.borjadelgadodev.freetogame.framework.remote
 
 import com.borjadelgadodev.freetogame.utils.Constants
 import retrofit2.Retrofit
