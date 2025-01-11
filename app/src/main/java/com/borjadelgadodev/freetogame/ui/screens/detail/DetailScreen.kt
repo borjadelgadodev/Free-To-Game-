@@ -39,10 +39,13 @@ import com.borjadelgadodev.freetogame.Result
 import com.borjadelgadodev.freetogame.ui.components.AcScaffold
 import com.borjadelgadodev.freetogame.ui.components.CustomSnackbar
 import com.borjadelgadodev.freetogame.ui.screens.home.Screen
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(viewModel: DetailViewModel, onBackClick: () -> Unit) {
+fun DetailScreen(
+    viewModel: DetailViewModel = koinViewModel(),
+    onBackClick: () -> Unit) {
     val state by viewModel.state.collectAsState()
     val detailState = rememberDetailState()
 
