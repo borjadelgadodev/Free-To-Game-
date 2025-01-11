@@ -31,12 +31,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.borjadelgadodev.domain.Game
 import com.borjadelgadodev.freetogame.R
 import com.borjadelgadodev.freetogame.ui.components.AcScaffold
 import com.borjadelgadodev.freetogame.ui.theme.FreeToGameTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun Screen(content: @Composable () -> Unit) {
@@ -51,7 +51,10 @@ fun Screen(content: @Composable () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(onClick: (Game) -> Unit, viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(
+    onClick: (Game) -> Unit,
+    viewModel: HomeViewModel = koinViewModel()
+) {
     val state by viewModel.state.collectAsState()
     val homeState = rememberHomeState()
 
@@ -121,7 +124,7 @@ fun GameItem(game: Game, onClick: () -> Unit) {
             }
         }
         Text(
-            text = game.title ?: "",
+            text = game.title,
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
